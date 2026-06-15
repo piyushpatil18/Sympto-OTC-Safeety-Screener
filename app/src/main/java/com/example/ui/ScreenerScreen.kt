@@ -62,6 +62,9 @@ fun ScreenerScreen(
     // Theme Toggle State
     var isDarkMode by remember { mutableStateOf(true) }
 
+    // About Dialog State
+    var showAboutDialog by remember { mutableStateOf(false) }
+
     // Dynamic Theme Colors (Midnight Emerald vs. Sleek Clinical Light Theme)
     val darkBg = if (isDarkMode) Color(0xFF0C1417) else Color(0xFFF1F5F9)
     val surfaceColor = if (isDarkMode) Color(0xFF162529) else Color(0xFFFFFFFF)
@@ -73,6 +76,111 @@ fun ScreenerScreen(
 
     val textColor = if (isDarkMode) Color.White else Color(0xFF0F172A)
     val subtextColor = if (isDarkMode) Color.LightGray else Color(0xFF475569)
+
+    if (showAboutDialog) {
+        AlertDialog(
+            onDismissRequest = { showAboutDialog = false },
+            title = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Image(
+                        painter = androidx.compose.ui.res.painterResource(id = R.drawable.ic_pharmacist_logo),
+                        contentDescription = "sympto logo",
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                    )
+                    Text(
+                        text = "About sympto",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = textColor
+                    )
+                }
+            },
+            text = {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    HorizontalDivider(color = primaryColor.copy(alpha = 0.2f))
+                    
+                    Column {
+                        Text(
+                            text = "Created by",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = subtextColor,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Prince Patil",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = textColor,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+
+                    Column {
+                        Text(
+                            text = "App Version",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = subtextColor,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "v1.0.0 (Build 2026.06.15)",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = textColor,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+
+                    Column {
+                        Text(
+                            text = "Product Capabilities",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = subtextColor,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.height(2.dp))
+                        Text(
+                            text = "• Dynamic symptom timeline evaluation\n" +
+                                   "• Adaptive over-the-counter local recommendations\n" +
+                                   "• Anti-interaction background medication watchdog\n" +
+                                   "• Multi-ingredient allergen screening filters\n" +
+                                   "• Direct generative AI pharmacist counseling Chat",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = subtextColor,
+                            lineHeight = 16.sp
+                        )
+                    }
+
+                    HorizontalDivider(color = primaryColor.copy(alpha = 0.2f))
+
+                    Text(
+                        text = "Disclaimer: sympto provides structured educational drug informational guidance. It does NOT substitute for professional clinical judgments, medical prescriptions, or emergency healthcare services.",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = primaryColor,
+                        fontWeight = FontWeight.Medium,
+                        lineHeight = 14.sp
+                    )
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = { showAboutDialog = false },
+                    colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text("Dismiss", color = Color.White, fontWeight = FontWeight.Bold)
+                }
+            },
+            containerColor = surfaceColor,
+            shape = RoundedCornerShape(20.dp)
+        )
+    }
 
     Scaffold(
         modifier = modifier
@@ -120,11 +228,39 @@ fun ScreenerScreen(
                         }
                     }
 
-                    // Theme and Region Selectors Row
+                    // Theme, Region, and About Selectors Row
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
+                        // About Button
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(if (isDarkMode) Color.White.copy(alpha = 0.1f) else Color.Black.copy(alpha = 0.05f))
+                                .clickable { showAboutDialog = true }
+                                .padding(horizontal = 10.dp, vertical = 8.dp)
+                                .testTag("btn_about")
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Info,
+                                    contentDescription = "About",
+                                    tint = textColor,
+                                    modifier = Modifier.size(14.dp)
+                                )
+                                Text(
+                                    text = "About",
+                                    color = textColor,
+                                    fontWeight = FontWeight.Bold,
+                                    style = MaterialTheme.typography.labelMedium
+                                )
+                            }
+                        }
+
                         // Dynamic Emojis Mode Pillar Toggle
                         Box(
                             modifier = Modifier
@@ -1366,6 +1502,57 @@ fun HistoryTabContent(
                             }
                         }
                     }
+                }
+            }
+        }
+
+        // Persistent About Card at the bottom of the History page
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = themeBg),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = "About sympto",
+                        tint = primary,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Text(
+                        text = "About sympto",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = textColor
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "A smart clinical pharmacist evaluation screener developed by Prince Patil.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = textColor
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                HorizontalDivider(color = primary.copy(alpha = 0.2f), modifier = Modifier.padding(vertical = 4.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "App Version: 1.0.0",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = subtextColor
+                    )
+                    Text(
+                        text = "Build: Production-Ready (2026)",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = subtextColor
+                    )
                 }
             }
         }
