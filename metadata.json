@@ -1,5 +1,5 @@
 {
-  "name": "sympto",
+  "name": "SYMPTO",
   "description": "Structured pharmacist-brain logic for recommending OTC medications safely with red-flag screening, duration-ladder advice, and localized brand recommendations.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

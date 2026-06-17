@@ -87,16 +87,17 @@ fun ScreenerScreen(
                 ) {
                     Image(
                         painter = androidx.compose.ui.res.painterResource(id = R.drawable.ic_pharmacist_logo),
-                        contentDescription = "sympto logo",
+                        contentDescription = "SYMPTO Logo",
                         modifier = Modifier
                             .size(36.dp)
                             .clip(RoundedCornerShape(8.dp))
                     )
                     Text(
-                        text = "About sympto",
+                        text = "About SYMPTO",
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
-                        color = textColor
+                        color = textColor,
+                        letterSpacing = 1.sp
                     )
                 }
             },
@@ -115,7 +116,7 @@ fun ScreenerScreen(
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = "Prince Patil",
+                            text = "Piyush B. Patil",
                             style = MaterialTheme.typography.bodyMedium,
                             color = textColor,
                             fontWeight = FontWeight.SemiBold
@@ -160,7 +161,7 @@ fun ScreenerScreen(
                     HorizontalDivider(color = primaryColor.copy(alpha = 0.2f))
 
                     Text(
-                        text = "Disclaimer: sympto provides structured educational drug informational guidance. It does NOT substitute for professional clinical judgments, medical prescriptions, or emergency healthcare services.",
+                        text = "Disclaimer: SYMPTO provides structured educational drug informational guidance. It does NOT substitute for professional clinical judgments, medical prescriptions, or emergency healthcare services.",
                         style = MaterialTheme.typography.labelSmall,
                         color = primaryColor,
                         fontWeight = FontWeight.Medium,
@@ -207,23 +208,25 @@ fun ScreenerScreen(
                     ) {
                         Image(
                             painter = androidx.compose.ui.res.painterResource(id = R.drawable.ic_pharmacist_logo),
-                            contentDescription = "Pharmacist Logo",
+                            contentDescription = "SYMPTO Logo",
                             modifier = Modifier
                                 .size(40.dp)
                                 .clip(RoundedCornerShape(8.dp))
                         )
                         Column {
                             Text(
-                                text = "sympto",
+                                text = "SYMPTO",
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.Black,
-                                color = textColor
+                                color = textColor,
+                                letterSpacing = 2.sp
                             )
                             Text(
-                                text = "OTC Safety Screener",
+                                text = "Smart Relief. Simple Choices.",
                                 style = MaterialTheme.typography.labelSmall,
                                 fontWeight = FontWeight.Bold,
-                                color = primaryColor
+                                color = primaryColor,
+                                letterSpacing = 0.5.sp
                             )
                         }
                     }
@@ -561,15 +564,30 @@ fun ScreenerTabContent(
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Image(
                             painter = androidx.compose.ui.res.painterResource(id = R.drawable.ic_pharmacist_logo),
-                            contentDescription = "Pharmacist Logo",
+                            contentDescription = "SYMPTO Logo",
                             modifier = Modifier
-                                .size(96.dp)
+                                .size(110.dp)
                                 .clip(RoundedCornerShape(20.dp))
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
+                            text = "SYMPTO",
+                            style = MaterialTheme.typography.headlineMedium,
+                            color = textColor,
+                            fontWeight = FontWeight.Black,
+                            letterSpacing = 3.sp
+                        )
+                        Text(
+                            text = "Smart Relief. Simple Choices.",
+                            style = MaterialTheme.typography.titleSmall,
+                            color = primary,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 1.sp
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
                             text = "Pharmacist Brain is Ready",
-                            style = MaterialTheme.typography.titleLarge,
+                            style = MaterialTheme.typography.titleMedium,
                             color = textColor,
                             fontWeight = FontWeight.Bold
                         )
@@ -1519,20 +1537,21 @@ fun HistoryTabContent(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Info,
-                        contentDescription = "About sympto",
+                        contentDescription = "About SYMPTO",
                         tint = primary,
                         modifier = Modifier.size(20.dp)
                     )
                     Text(
-                        text = "About sympto",
+                        text = "About SYMPTO",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
-                        color = textColor
+                        color = textColor,
+                        letterSpacing = 1.sp
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "A smart clinical pharmacist evaluation screener developed by Prince Patil.",
+                    text = "A smart clinical pharmacist evaluation screener developed by Piyush B. Patil.",
                     style = MaterialTheme.typography.bodySmall,
                     color = textColor
                 )
